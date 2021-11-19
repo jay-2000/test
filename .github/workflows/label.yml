@@ -6,17 +6,21 @@
 # https://github.com/actions/labeler
 
 name: Labeler
-on: [pull_request]
+on:
+  issues:
+    types: [opened, edited]
 
 jobs:
   label:
 
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
+#     permissions:
+#       contents: read
+#       pull-requests: write
 
     steps:
     - uses: actions/labeler@v2
       with:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
+        configuration-path: .github/label.yml
+        enable-versioned-regex: 0
